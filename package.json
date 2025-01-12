@@ -1,0 +1,76 @@
+{
+    "name": "i18n-helper",
+    "displayName": "I18n Helper",
+    "description": "自动化国际化处理工具",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.60.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onLanguage:typescriptreact",
+        "onLanguage:typescript",
+        "onLanguage:javascriptreact",
+        "onLanguage:javascript"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "i18n-helper.extractText",
+                "title": "提取文本到 i18n"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "i18n-helper.extractText",
+                "key": "ctrl+alt+i",
+                "mac": "cmd+alt+i",
+                "when": "editorHasSelection"
+            }
+        ],
+        "configuration": {
+            "title": "I18n Helper",
+            "properties": {
+                "i18nHelper.localesPath": {
+                    "type": "string",
+                    "default": "src/locales",
+                    "description": "语言包文件路径"
+                },
+                "i18nHelper.baiduAppId": {
+                    "type": "string",
+                    "default": "",
+                    "description": "百度翻译 API 的 APP ID"
+                },
+                "i18nHelper.baiduSecret": {
+                    "type": "string",
+                    "default": "",
+                    "description": "百度翻译 API 的密钥"
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "npm run compile && npm run lint",
+        "lint": "eslint src --ext ts"
+    },
+    "devDependencies": {
+        "@types/node": "^14.x.x",
+        "@types/vscode": "^1.60.0",
+        "@typescript-eslint/eslint-plugin": "^4.x.x",
+        "@typescript-eslint/parser": "^4.x.x",
+        "eslint": "^7.x.x",
+        "typescript": "^4.x.x"
+    },
+    "dependencies": {
+        "@types/node-fetch": "^2.6.12",
+        "@types/pinyin": "^2.10.2",
+        "node-fetch": "^2.7.0",
+        "pinyin": "^4.0.0-alpha.2"
+    }
+}
