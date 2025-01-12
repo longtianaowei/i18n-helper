@@ -1,26 +1,15 @@
 import * as vscode from 'vscode';
 import { translateToBaiduId } from './translator';
 
-function generateFallbackId(text: string): string {
-    // 生成一个基于文本内容和时间戳的默认ID
-    const timestamp = Date.now();
-    const sanitizedText = text
-        .slice(0, 20)  // 限制长度
-        .replace(/[^a-zA-Z0-9\u4e00-\u9fa5]/g, '_');  // 保留中文和字母数字
-    return `text_${sanitizedText}_${timestamp}`;
-}
-
 export async function extractI18n(
     document: vscode.TextDocument,
     selection: vscode.Selection
 ): Promise<{ updatedCode: string; i18nKey: string }> {
     const text = document.getText(selection);
-    // console.log('text的值', text)
-    let i18nKey = await translateToBaiduId(text).catch(() => generateFallbackId(text));
+    let i18nKey = await translateToBaiduId(text);
     
     // 检查是否已经导入了必要的依赖
     const fullText = document.getText();
-    // console.log('fullText的值', fullText);
 
     // 找到所有的 import 语句，处理不同的换行符
     const importRegex = /import[\s\S]+?from\s+['"][^'"]+['"];?/g;
