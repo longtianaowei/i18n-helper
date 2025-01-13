@@ -2,8 +2,8 @@
     "name": "i18n-helper",
     "displayName": "I18n Helper",
     "description": "自动化国际化处理工具",
-    "version": "0.0.1",
-    "publisher": "发布者ID",
+    "version": "0.0.3",
+    "publisher": "1ad238d8-6d76-67d5-9523-483de049bac8",
     "repository": {
         "type": "git",
         "url": "https://github.com/longtianaowei/i18n-helper"

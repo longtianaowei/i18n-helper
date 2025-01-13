@@ -62,30 +62,32 @@ export function activate(context: vscode.ExtensionContext) {
                 const line = lines[i];
                 const index = line.indexOf(text);
                 if (index !== -1) {
-                    // 确保找到的是完整的词，而不是 defaultMessage 中的文本
+                    // 检查是否在注释中或console.log中
                     const lineBeforeText = line.substring(0, index);
-                    const lineAfterText = line.substring(index + text.length);
-                    
-                    // 检查是否在 defaultMessage 中
-                    if (!lineBeforeText.includes('defaultMessage:')) {
-                        // 计算精确的位置
-                        const lineStart = document.offsetAt(new vscode.Position(i, 0));
-                        const startPos = document.positionAt(lineStart + index);
-                        const endPos = document.positionAt(lineStart + index + text.length);
-                        
-                        // 替换文本
-                        await editor.edit(editBuilder => {
-                            editBuilder.replace(new vscode.Selection(startPos, endPos), updatedCode);
-                        });
-                        found = true;
-                        break;
+                    if (lineBeforeText.includes('//') || 
+                        lineBeforeText.includes('console.log') ||
+                        line.trim().startsWith('/*') || 
+                        line.trim().startsWith('*') || 
+                        lineBeforeText.includes('defaultMessage:')) {
+                        continue;
                     }
+
+                    // 计算精确的位置
+                    const lineStart = document.offsetAt(new vscode.Position(i, 0));
+                    const startPos = document.positionAt(lineStart + index);
+                    const endPos = document.positionAt(lineStart + index + text.length);
+                    
+                    // 替换文本
+                    await editor.edit(editBuilder => {
+                        editBuilder.replace(new vscode.Selection(startPos, endPos), updatedCode);
+                    });
+                    found = true;
+                    break;
                 }
             }
             
             if (!found) {
-
-                vscode.window.showErrorMessage('国际化处理失败,未匹配到最开始的文本')
+                vscode.window.showErrorMessage('国际化处理失败,未匹配到最开始的文本');
             }
 
             // 更新语言包文件 后续版本加入科举哥脚本
