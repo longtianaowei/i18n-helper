@@ -88,8 +88,8 @@ export function activate(context: vscode.ExtensionContext) {
                 vscode.window.showErrorMessage('国际化处理失败,未匹配到最开始的文本')
             }
 
-            // 更新语言包文件
-            await updateLocaleFiles(i18nKey, text);
+            // 更新语言包文件 后续版本加入科举哥脚本
+            // await updateLocaleFiles(i18nKey, text);
             
             // console.log('处理成功，i18nKey:', i18nKey);
             vscode.window.showInformationMessage('国际化处理成功！');

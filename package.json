@@ -3,6 +3,11 @@
     "displayName": "I18n Helper",
     "description": "自动化国际化处理工具",
     "version": "0.0.1",
+    "publisher": "发布者ID",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/longtianaowei/i18n-helper"
+    },
     "engines": {
         "vscode": "^1.60.0"
     },
@@ -20,7 +25,7 @@
         "commands": [
             {
                 "command": "i18n-helper.extractText",
-                "title": "提取文本到 i18n"
+                "title": "运行i18n-helper"
             }
         ],
         "keybindings": [
