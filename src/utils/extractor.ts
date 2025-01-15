@@ -29,9 +29,9 @@ export async function extractI18n(
     if (!fullText.includes('import { defineMessages }')) {
         imports += `import { defineMessages } from 'react-intl'\n`;
     }
-    if (!fullText.includes('import { useIntl }')) {
-        imports += `import { useIntl } from '@umijs/max'\n`;
-    }
+    // if (!fullText.includes('import { useIntl }')) {
+    //     imports += `import { useIntl } from '@umijs/max'\n`;
+    // }
 
     // 检查是否已经存在 intlObj 定义
     const hasIntlObj = fullText.includes('const intlObj = defineMessages(');

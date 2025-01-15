@@ -36,7 +36,16 @@ export function activate(context: vscode.ExtensionContext) {
 
         const document = editor.document;
         const selection = editor.selection;
-        const text = document.getText(selection);
+        let text = document.getText(selection);
+        
+        if (!text) {
+            // 获取光标位置的单词
+            const wordRange = document.getWordRangeAtPosition(selection.active);
+            if (wordRange) {
+                text = document.getText(wordRange);
+                editor.selection = new vscode.Selection(wordRange.start, wordRange.end);
+            }
+        }
 
         if (!text) {
             vscode.window.showWarningMessage('请先选择要国际化的文本');
@@ -68,7 +77,8 @@ export function activate(context: vscode.ExtensionContext) {
                         lineBeforeText.includes('console.log') ||
                         line.trim().startsWith('/*') || 
                         line.trim().startsWith('*') || 
-                        lineBeforeText.includes('defaultMessage:')) {
+                        lineBeforeText.includes('defaultMessage:') ||
+                        lineBeforeText.includes('{/*')) {
                         continue;
                     }
 
