@@ -2,7 +2,7 @@
     "name": "i18n-helper",
     "displayName": "I18n Helper",
     "description": "自动化国际化处理工具",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "publisher": "1ad238d8-6d76-67d5-9523-483de049bac8",
     "repository": {
         "type": "git",
@@ -31,8 +31,8 @@
         "keybindings": [
             {
                 "command": "i18n-helper.extractText",
-                "key": "ctrl+i",
-                "mac": "cmd+i",
+                "key": "ctrl+d",
+                "mac": "cmd+d",
                 "when": "editorHasSelection"
             }
         ],
