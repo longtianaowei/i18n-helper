@@ -8,12 +8,12 @@
         "url": "https://github.com/longtianaowei"
     },
     "publisher": "longtianaowei",
-    "icon": "images/icon.png",  
+    "icon": "images/icon.png",
     "repository": {
         "type": "git",
-        "url": "https://github.com/longtianaowei/i18n-helper"  
+        "url": "https://github.com/longtianaowei/i18n-helper"
     },
-    "license": "MIT",  
+    "license": "MIT",
     "version": "0.0.7",
     "engines": {
         "vscode": "^1.60.0"
@@ -39,17 +39,31 @@
                 "title": "运行i18n-helper 生成t('国际化key')"
             }
         ],
+        "menus": {
+            "editor/context": [
+                {
+                    "command": "i18n-helper.extractTextWithCurlyBraces",
+                    "when": "editorHasSelection",
+                    "group": "navigation"
+                },
+                {
+                    "command": "i18n-helper.extractTextWithoutCurlyBraces",
+                    "when": "editorHasSelection",
+                    "group": "navigation"
+                }
+            ]
+        },
         "keybindings": [
             {
                 "command": "i18n-helper.extractTextWithCurlyBraces",
-                "key": "${config:i18nHelper.customKeyWithCurly}",
-                "mac": "${config:i18nHelper.customKeyWithCurlyMac}",
+                "key": "ctrl+shift+d",
+                "mac": "cmd+shift+d",
                 "when": "editorHasSelection"
             },
             {
                 "command": "i18n-helper.extractTextWithoutCurlyBraces",
-                "key": "${config:i18nHelper.customKeyWithoutCurly}",
-                "mac": "${config:i18nHelper.customKeyWithoutCurlyMac}",
+                "key": "ctrl+d",
+                "mac": "cmd+d",
                 "when": "editorHasSelection"
             }
         ],
@@ -70,26 +84,6 @@
                     "type": "string",
                     "default": "",
                     "description": "百度翻译 API 的密钥"
-                },
-                "i18nHelper.customKeyWithCurly": {
-                    "type": "string",
-                    "default": "ctrl+shift+d",
-                    "description": "自定义生成 {t('key')}格式的快捷键 (Windows/Linux)"
-                },
-                "i18nHelper.customKeyWithCurlyMac": {
-                    "type": "string",
-                    "default": "cmd+shift+d",
-                    "description": "自定义生成 {t('key')}格式的快捷键 (Mac)"
-                },
-                "i18nHelper.customKeyWithoutCurly": {
-                    "type": "string",
-                    "default": "ctrl+d",
-                    "description": "自定义生成 t('key')格式的快捷键 (Windows/Linux)"
-                },
-                "i18nHelper.customKeyWithoutCurlyMac": {
-                    "type": "string",
-                    "default": "cmd+d",
-                    "description": "自定义生成 t('key')格式的快捷键 (Mac)"
                 },
                 "i18nHelper.updateLocaleFiles": {
                     "type": "boolean",
