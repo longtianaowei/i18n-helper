@@ -11,14 +11,15 @@ interface BaiduTranslateResponse {
     }[];
 }
 
-export async function translateToBaiduId(text: string): Promise<string> {
+export async function translateToBaidu(text: string): Promise<{ id: string; translatedText: string; }> {
     const config = vscode.workspace.getConfiguration('i18nHelper');
     const appid = config.get<string>('baiduAppId') || '';
     const secret = config.get<string>('baiduSecret') || '';
     
     if (!appid || !secret) {
         // 如果没有配置百度翻译，使用本地生成ID的方式
-        return generateLocalId(text);
+        const id = generateLocalId(text);
+        return { id, translatedText: text };
     }
 
     const salt = Date.now().toString();
@@ -40,11 +41,13 @@ export async function translateToBaiduId(text: string): Promise<string> {
         
         if (data.trans_result?.[0]?.dst) {
             const translatedText = data.trans_result[0].dst;
-            return generateIdFromTranslation(translatedText);
+            const id = generateIdFromTranslation(translatedText);
+            return { id, translatedText };
         }
         throw new Error('Translation failed: No result');
     } catch (error) {
-        return generateLocalId(text);
+        const id = generateLocalId(text);
+        return { id, translatedText: text };
     }
 }
 

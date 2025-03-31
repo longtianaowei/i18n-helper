@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 
-export async function updateLocaleFiles(key: string, text: string): Promise<void> {
+export async function updateLocaleFiles(key: string, text: string, translatedText: string): Promise<void> {
     const config = vscode.workspace.getConfiguration('i18nHelper');
     const localesPath = config.get<string>('localesPath') || 'src/locales';
     
@@ -22,7 +22,7 @@ export async function updateLocaleFiles(key: string, text: string): Promise<void
     }
 
     await updateLocaleFile(zhPath, key, text);
-    await updateLocaleFile(enPath, key, text);
+    await updateLocaleFile(enPath, key, translatedText);
 }
 
 async function updateLocaleFile(filePath: string, key: string, value: string): Promise<void> {
