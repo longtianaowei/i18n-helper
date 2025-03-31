@@ -27,6 +27,52 @@
 
 ![插件设置示例2](images/step2.png)
 
+umi项目中使用
+
+```ts
+封装一个hooks 
+// utils/useIntlFormatMessage.ts
+import { useIntl } from 'umi'
+
+export function useIntlFormatMessage() {
+  const intl = useIntl()
+  return (
+    id: string | { id: string; defaultMessage?: string; description?: string },
+    values?: any
+  ) => {
+    if (typeof id === 'string') {
+      return intl.formatMessage({ id, defaultMessage: id }, values)
+    }
+    return intl.formatMessage(id, values)
+  }
+}
+
+在组件中使用
+import {useIntlFormatMessage} from '@/utils/useIntlFormatMessage'
+export default function MyComponent() {
+    const t = useIntlFormatMessage()
+    return <div>{t("you_i18n_key")}</div>
+}
+
+在组件外无法使用自定义hooks 要在组件外使用，封装另外一个t函数
+// utils/index.ts
+import type { MessageDescriptor, PrimitiveType } from 'react-intl'
+import { getIntl } from '@umijs/max'
+export const t = (
+  descriptor: MessageDescriptor,
+  values?: Record<string, PrimitiveType | React.ReactElement | FormatFn>
+) => {
+  return getIntl().formatMessage(descriptor, values)
+}
+
+
+在组件外使用
+import { t } from '@/utils'
+
+t("you_i18n_key")
+```
+
+
 1. 在代码中选择要提取的文本。
 2. 使用以下快捷键生成国际化键 或 鼠标右键弹出运行菜单点击对应选项运行即刻，插件会自动将翻译内容写入对应的语言包 JSON 文件：
    - 按下 `ctrl+shift+d`（Windows/Linux）或 `cmd+shift+d`（Mac）生成 `{t('key')}` 格式。
