@@ -1,8 +1,20 @@
 {
     "name": "i18n-helper",
-    "displayName": "I18n Helper",
-    "description": "自动化国际化处理工具",
-    "version": "0.0.6",
+    "displayName": "i18n Helper",
+    "description": "国际化处理工具，帮助快速生成并管理翻译 key。",
+    "author": {
+        "name": "longtianaowei",
+        "email": "longtianaw@163.com",
+        "url": "https://github.com/longtianaowei"
+    },
+    "publisher": "longtianaowei",
+    "icon": "images/icon.png",  
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/longtianaowei/i18n-helper"  
+    },
+    "license": "MIT",  
+    "version": "0.0.7",
     "engines": {
         "vscode": "^1.60.0"
     },
@@ -42,7 +54,7 @@
             }
         ],
         "configuration": {
-            "title": "I18n Helper",
+            "title": "i18n Helper",
             "properties": {
                 "i18nHelper.localesPath": {
                     "type": "string",
@@ -62,27 +74,27 @@
                 "i18nHelper.customKeyWithCurly": {
                     "type": "string",
                     "default": "ctrl+shift+d",
-                    "description": "自定义生成 {t('key')} 的快捷键 (Windows/Linux)"
+                    "description": "自定义生成 {t('key')}格式的快捷键 (Windows/Linux)"
                 },
                 "i18nHelper.customKeyWithCurlyMac": {
                     "type": "string",
                     "default": "cmd+shift+d",
-                    "description": "自定义生成 {t('key')} 的快捷键 (Mac)"
+                    "description": "自定义生成 {t('key')}格式的快捷键 (Mac)"
                 },
                 "i18nHelper.customKeyWithoutCurly": {
                     "type": "string",
                     "default": "ctrl+d",
-                    "description": "自定义生成 t('key') 的快捷键 (Windows/Linux)"
+                    "description": "自定义生成 t('key')格式的快捷键 (Windows/Linux)"
                 },
                 "i18nHelper.customKeyWithoutCurlyMac": {
                     "type": "string",
                     "default": "cmd+d",
-                    "description": "自定义生成 t('key') 的快捷键 (Mac)"
+                    "description": "自定义生成 t('key')格式的快捷键 (Mac)"
                 },
                 "i18nHelper.updateLocaleFiles": {
                     "type": "boolean",
                     "default": true,
-                    "description": "是否更新语言包文件"
+                    "description": "是否将翻译文本更新进语言包文件"
                 }
             }
         }
